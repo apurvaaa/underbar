@@ -307,7 +307,24 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-  };
+    var alreadyCalledArgList = {};
+    var result;
+
+    return function() {
+      var alreadyCalled = alreadyCalledArgList[arguments[1]];
+
+      if (!alreadyCalled) {
+        // TIP: .apply(this, arguments) is the standard way to pass on all of the
+        // infromation from one function call to another.
+        result = func.apply(this, arguments);
+        alreadyCalledArgList[arguments[1]] = result;
+      } else {
+        result = alreadyCalledArgList[arguments[1]];
+      }
+      // The new function always returns the originally computed result.
+      return result;
+    };
+  }
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
