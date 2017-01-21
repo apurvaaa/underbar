@@ -52,7 +52,6 @@
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
 
-    // for arrays:
     if (Array.isArray(collection)) {
       for (var i = 0; i < collection.length; i++) {
         iterator(collection[i], i, collection);
@@ -83,6 +82,17 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    var result;
+
+    result = [];
+    for (var i = 0; i < collection.length; i++) {
+      if (test(collection[i])) {
+        result.push(collection[i]);
+      }
+    }
+    
+    return result;
+
   };
 
   // Return all elements of an array that don't pass a truth test.
