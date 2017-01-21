@@ -324,7 +324,7 @@
       // The new function always returns the originally computed result.
       return result;
     };
-  }
+  };
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
@@ -354,6 +354,25 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var arr_contents = {};
+    var result = [];
+
+    _.each(array, function(item, i) {
+      var inserted = false;
+      while(!inserted) {
+        var random_num = Math.floor(Math.random() *(array.length));
+        if (!(random_num in arr_contents)) {
+          arr_contents[random_num] = item;
+          inserted = true;
+        }
+      }
+    });
+
+    for (var i = 0; i < array.length; i++) {
+      result.push(arr_contents[i]);
+    }
+
+    return result;
   };
 
 
